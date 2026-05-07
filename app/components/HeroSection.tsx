@@ -44,7 +44,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
           >
-            Web Developer
+            Design Engineer
           </motion.p>
 
           {/* ── Megatype — Syne 800 (design spec) ── */}
