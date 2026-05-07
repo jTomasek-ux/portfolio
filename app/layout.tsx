@@ -24,7 +24,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "jtomasek — Web Developer",
+  title: "Jtomasek — Web Developer",
   description:
     "Portfolio of Jan Tomasek, a web developer based in Czech Republic building pixel-perfect digital experiences.",
 };

@@ -31,21 +31,22 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
       {/* ── Main content ── */}
       <div className="relative z-10 flex h-full flex-col px-8 md:px-12 pt-28 pb-10">
 
-        {/* Role label */}
-        <motion.p
-          className="font-ui text-[10px] md:text-[11px] tracking-[0.38em] uppercase"
-          style={{ color: muted, transition: "color 0.5s ease" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
-        >
-          Web Developer
-        </motion.p>
+        {/* Spacer — pushes role + megatype block toward lower half */}
+        <div className="flex-1 min-h-0" />
 
-        {/* Flex spacer — pushes megatype toward lower half */}
-        <div className="flex-1" />
+        {/* Role label + megatype — ½" between label and headline */}
+        <div className="flex flex-col gap-[0.5in]">
+          <motion.p
+            className="font-ui text-[10px] md:text-[11px] tracking-[0.38em] uppercase"
+            style={{ color: muted, transition: "color 0.5s ease" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+          >
+            Web Developer
+          </motion.p>
 
-        {/* ── Megatype — Syne 800 (design spec) ── */}
+          {/* ── Megatype — Syne 800 (design spec) ── */}
         {/*
           Each line is wrapped in overflow-hidden so the span can slide
           up from y:108% creating the editorial "text reveal" effect.
@@ -53,7 +54,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         */}
         <h1
           aria-label="Jan Tomasek"
-          className="select-none uppercase"
+          className="select-none uppercase -translate-y-[0.5in]"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontStyle: "normal",
@@ -89,6 +90,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
             </motion.span>
           </div>
         </h1>
+        </div>
 
         {/* ── Bio ── */}
         <motion.p

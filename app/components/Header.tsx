@@ -25,18 +25,18 @@ export default function Header({ isDark, onToggle }: HeaderProps) {
       {/* ── Logo ── */}
       <a
         href="/"
-        className="inline-block overflow-visible pb-0.5 transition-transform duration-200 hover:-translate-y-px"
+        className="transition-transform duration-200 hover:-translate-y-px"
         style={{
           fontFamily: "var(--font-syne), sans-serif",
           fontStyle: "normal",
           fontWeight: 800,
           fontSize: "15px",
-          lineHeight: 1.35,
+          lineHeight: "normal",
           color: isDark ? "rgb(237, 237, 232)" : "#0E0D0C",
           transition: "color 0.5s ease",
         }}
       >
-        jtomasek
+        Jtomasek
       </a>
 
       {/* ── Right cluster ── */}
