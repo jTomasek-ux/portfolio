@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
@@ -8,10 +9,17 @@ const easeInHeavy: [number, number, number, number] = [0.45, 0, 0.55, 1];
 interface F1CarProps {
   className?: string;
   raceAway?: boolean;
+  onExitComplete?: () => void;
 }
 
-export default function F1Car({ className, raceAway = false }: F1CarProps) {
+export default function F1Car({
+  className,
+  raceAway = false,
+  onExitComplete,
+}: F1CarProps) {
   const reduceMotion = useReducedMotion();
+  const onExitCompleteRef = useRef(onExitComplete);
+  onExitCompleteRef.current = onExitComplete;
 
   /* Plain vw avoids FM failing to interpolate 0 → min(); reduced-motion still
      animates briefly so the car visibly exits instead of snapping (duration 0). */
@@ -26,6 +34,11 @@ export default function F1Car({ className, raceAway = false }: F1CarProps) {
       initial={{ x: "-2in" }}
       animate={raceAway ? { x: "120vw" } : { x: 0 }}
       transition={raceAway ? exitTransition : { duration: 1.95, ease }}
+      onAnimationComplete={() => {
+        if (raceAway) {
+          onExitCompleteRef.current?.();
+        }
+      }}
     >
       <svg
         width={1086}

@@ -7,23 +7,30 @@ const easeOutHeavy: [number, number, number, number] = [0.33, 1, 0.68, 1];
 
 interface F1CarInvertedProps {
   className?: string;
+  /** When true, animates from off-screen right into place (after lead car exit). */
+  slideIn?: boolean;
 }
 
-/** Mirrored F1 car; wrapper + SVG sizing match `F1Car`. Slides in from the right on mount. */
-export default function F1CarInverted({ className }: F1CarInvertedProps) {
+/** Mirrored F1 car; wrapper + SVG sizing match `F1Car`. Slides in when `slideIn` becomes true. */
+export default function F1CarInverted({
+  className,
+  slideIn = false,
+}: F1CarInvertedProps) {
   const reduceMotion = useReducedMotion();
 
-  const transition = reduceMotion
+  const enterTransition = reduceMotion
     ? { duration: 0.4, delay: 0.05, ease: "linear" as const }
-    : { duration: 1.95, delay: 0.32, ease: easeOutHeavy };
+    : { duration: 1.95, delay: 0.05, ease: easeOutHeavy };
+
+  const holdTransition = { duration: 0 };
 
   return (
     <motion.div
       className="pointer-events-none w-[min(100%,min(92cqi,300px))] max-w-[min(100%,min(92cqi,300px))] shrink-0 flex-none"
       aria-hidden
       initial={{ x: "120vw" }}
-      animate={{ x: 0 }}
-      transition={transition}
+      animate={slideIn ? { x: 0 } : { x: "120vw" }}
+      transition={slideIn ? enterTransition : holdTransition}
     >
       <div className={className ? `w-full ${className}` : "w-full"}>
         <svg

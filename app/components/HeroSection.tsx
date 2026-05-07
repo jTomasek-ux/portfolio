@@ -12,6 +12,8 @@ const ARROW_URL = "/images/noun-arrow-3255106.png";
 interface HeroSectionProps {
   isDark: boolean;
   f1LightsOut?: boolean;
+  f1LeadCarExited?: boolean;
+  onF1LeadCarExited?: () => void;
 }
 
 /* ─── Shared easing curve ─────────────────────────────────── */
@@ -38,7 +40,12 @@ function ScrollArrowIcon({ className }: { className?: string }) {
   );
 }
 
-export default function HeroSection({ isDark, f1LightsOut = false }: HeroSectionProps) {
+export default function HeroSection({
+  isDark,
+  f1LightsOut = false,
+  f1LeadCarExited = false,
+  onF1LeadCarExited,
+}: HeroSectionProps) {
   const glitchJan     = useRef<GlitchTextHandle>(null);
   const glitchTomasek = useRef<GlitchTextHandle>(null);
 
@@ -80,7 +87,10 @@ export default function HeroSection({ isDark, f1LightsOut = false }: HeroSection
             className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
             style={{ containerType: "inline-size" }}
           >
-            <F1Car raceAway={f1LightsOut} />
+            <F1Car
+              raceAway={f1LightsOut}
+              onExitComplete={onF1LeadCarExited}
+            />
             <motion.p
               className="uppercase"
               style={{
@@ -132,7 +142,10 @@ export default function HeroSection({ isDark, f1LightsOut = false }: HeroSection
                   <span className="min-w-0 shrink">
                     <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
                   </span>
-                  <F1CarInverted className="-translate-y-[0.1em]" />
+                  <F1CarInverted
+                    slideIn={f1LeadCarExited}
+                    className="-translate-y-[0.1em]"
+                  />
                 </motion.span>
               </div>
 
