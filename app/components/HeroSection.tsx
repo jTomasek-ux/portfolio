@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import GlitchText, { type GlitchTextHandle } from "./GlitchText";
 
 /* Arrow icon is now served from public/images/ as a static asset */
 const ARROW_URL = "/images/noun-arrow-3255106.png";
@@ -34,12 +36,24 @@ function ScrollArrowIcon({ className }: { className?: string }) {
 }
 
 export default function HeroSection({ isDark }: HeroSectionProps) {
+  const glitchJan     = useRef<GlitchTextHandle>(null);
+  const glitchTomasek = useRef<GlitchTextHandle>(null);
+
+  const handleNameEnter = () => {
+    glitchJan.current?.start();
+    glitchTomasek.current?.start();
+  };
+  const handleNameLeave = () => {
+    glitchJan.current?.stop();
+    glitchTomasek.current?.stop();
+  };
+
   /* Semantic color aliases that flip on theme change */
-  const bg     = isDark ? "#0E0D0C" : "#F0F0EB";
-  const cream  = isDark ? "#ECECE7" : "#0E0D0C";
+  const bg    = isDark ? "#0E0D0C" : "#F0F0EB";
+  const cream = isDark ? "#ECECE7" : "#0E0D0C";
   const muted = isDark ? "#93938F" : "#6B6B67";
-  /* Spec oklch(0.205) on light; light neutral on dark for contrast */
   const scrollFootColor = isDark ? "oklch(0.78 0 0)" : "oklch(0.205 0 0)";
+  const nameColor       = isDark ? "rgb(237, 237, 232)" : cream;
 
   return (
     <section
@@ -56,103 +70,104 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
 
       {/* ── Main content ── */}
       <div className="relative z-10 flex h-full min-w-0 flex-col px-8 md:px-12 pt-28 pb-10">
-        {/* flex-1 + justify-end: pin block to lower half; margin changes are not eaten by a growing spacer */}
         <div className="flex min-h-0 flex-1 flex-col justify-end">
-        {/* Role label + megatype — ½" between label and headline */}
-        <div
-          className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
-          style={{ containerType: "inline-size" }}
-        >
-          <motion.p
-            className="uppercase"
+
+          {/* Role label + megatype */}
+          <div
+            className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
+            style={{ containerType: "inline-size" }}
+          >
+            <motion.p
+              className="uppercase"
+              style={{
+                fontFamily: '"Saans", "saans Fallback", var(--font-space-grotesk), sans-serif',
+                fontStyle: "normal",
+                fontWeight: 600,
+                fontSize: "17px",
+                lineHeight: "26px",
+                color: isDark ? "oklch(0.708 0 0)" : "oklch(0.205 0 0)",
+                transition: "color 0.5s ease",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+            >
+              Design Engineer
+            </motion.p>
+
+            {/*
+              Each line is wrapped in overflow-hidden so the span slides up
+              from y:108% on page load (editorial text-reveal effect).
+              Hovering the h1 fires start()/stop() on both GlitchText refs —
+              zero React re-renders during the scramble animation.
+            */}
+            <h1
+              aria-label="Jan Tomasek"
+              className="w-full min-w-0 max-w-full select-none -translate-y-[0.5in] cursor-default"
+              style={{
+                fontFamily: "var(--font-syne), sans-serif",
+                fontStyle: "normal",
+                fontWeight: 800,
+                fontSize: "min(173px, calc(100cqi / 5.18))",
+                lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
+                letterSpacing: "normal",
+                color: nameColor,
+                transition: "color 0.5s ease",
+              }}
+              onMouseEnter={handleNameEnter}
+              onMouseLeave={handleNameLeave}
+            >
+              {/* Line 1 */}
+              <div className="max-w-full overflow-hidden">
+                <motion.span
+                  className="block"
+                  initial={{ y: "108%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 1.1, delay: 0.28, ease }}
+                >
+                  <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
+                </motion.span>
+              </div>
+
+              {/* Line 2 */}
+              <div className="max-w-full overflow-hidden">
+                <motion.span
+                  className="block"
+                  initial={{ y: "108%" }}
+                  animate={{ y: "0%" }}
+                  transition={{ duration: 1.1, delay: 0.44, ease }}
+                >
+                  <GlitchText ref={glitchTomasek} text="Tomasek" baseColor={nameColor} />
+                </motion.span>
+              </div>
+            </h1>
+          </div>
+
+          {/* ── Bottom scroll hints ── */}
+          <motion.div
+            className="font-hero-scroll mt-4 flex w-full min-w-0 flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mt-5"
             style={{
-              fontFamily:
-                '"Saans", "saans Fallback", var(--font-space-grotesk), sans-serif',
               fontStyle: "normal",
-              fontWeight: 600,
+              fontWeight: 500,
               fontSize: "17px",
               lineHeight: "26px",
-              color: isDark ? "oklch(0.708 0 0)" : "oklch(0.205 0 0)",
+              color: scrollFootColor,
               transition: "color 0.5s ease",
             }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0, ease }}
           >
-            Design Engineer
-          </motion.p>
+            <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+              <ScrollArrowIcon className="shrink-0" />
+              <span className="whitespace-nowrap">Scroll to</span>
+            </div>
+            <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+              <span className="whitespace-nowrap">learn more</span>
+              <ScrollArrowIcon className="shrink-0" />
+            </div>
+          </motion.div>
 
-          {/* ── Megatype — Syne 800 (design spec) ── */}
-        {/*
-          Each line is wrapped in overflow-hidden so the span can slide
-          up from y:108% creating the editorial "text reveal" effect.
-          Desktop: 173px / 152px line-height, rgb(237,237,232); scales down on narrow viewports.
-        */}
-        <h1
-          aria-label="Jan Tomasek"
-          className="w-full min-w-0 max-w-full select-none -translate-y-[0.5in]"
-          style={{
-            fontFamily: "var(--font-syne), sans-serif",
-            fontStyle: "normal",
-            fontWeight: 800,
-            /* Longest line “Tomasek” — keep a small right-side safety margin */
-            fontSize: "min(173px, calc(100cqi / 5.18))",
-            lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
-            letterSpacing: "normal",
-            color: isDark ? "rgb(237, 237, 232)" : cream,
-            transition: "color 0.5s ease",
-          }}
-        >
-          {/* Line 1 — "Jan" */}
-          <div className="max-w-full overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: "108%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1.1, delay: 0.28, ease }}
-            >
-              Jan
-            </motion.span>
-          </div>
-
-          {/* Line 2 — "Tomasek" */}
-          <div className="max-w-full overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: "108%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1.1, delay: 0.44, ease }}
-            >
-              Tomasek
-            </motion.span>
-          </div>
-        </h1>
-        </div>
-
-        {/* ── Bottom scroll hints ── */}
-        <motion.div
-          className="font-hero-scroll mt-4 flex w-full min-w-0 flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mt-5"
-          style={{
-            fontStyle: "normal",
-            fontWeight: 500,
-            fontSize: "17px",
-            lineHeight: "26px",
-            color: scrollFootColor,
-            transition: "color 0.5s ease",
-          }}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0, ease }}
-        >
-          <div className="flex min-w-0 shrink-0 items-center gap-2.5">
-            <ScrollArrowIcon className="shrink-0" />
-            <span className="whitespace-nowrap">Scroll to</span>
-          </div>
-          <div className="flex min-w-0 shrink-0 items-center gap-2.5">
-            <span className="whitespace-nowrap">learn more</span>
-            <ScrollArrowIcon className="shrink-0" />
-          </div>
-        </motion.div>
         </div>
       </div>
     </section>
