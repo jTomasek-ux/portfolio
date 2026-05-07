@@ -8,6 +8,7 @@ interface ScrollRevealTextProps {
   text: string;
   baseColor: string;
   bgColor: string;
+  label?: string;
   className?: string;
 }
 
@@ -28,6 +29,7 @@ export default function ScrollRevealText({
   text,
   baseColor,
   bgColor,
+  label,
   className,
 }: ScrollRevealTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,13 +43,17 @@ export default function ScrollRevealText({
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 80%", "end end"],
+    /* Start tracking when the section enters at the very bottom of the
+       viewport; finish halfway through the sticky scroll so all words
+       have revealed by the time the section is centred on screen. */
+    offset: ["start end", "center center"],
   });
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     for (let i = 0; i < n; i++) {
-      /* Spread trigger points evenly across 0 → 0.85 of scroll range */
-      const threshold = (i / n) * 0.85;
+      /* Compress all triggers into 0 → 0.9 so the last word fires well
+         before the user has scrolled to the midpoint of the section. */
+      const threshold = (i / n) * 0.9;
 
       if (progress >= threshold && !triggered.current[i]) {
         triggered.current[i] = true;
@@ -72,9 +78,24 @@ export default function ScrollRevealText({
   return (
     <div ref={containerRef} className={`h-[200vh] ${className ?? ""}`}>
       <div
-        className="sticky top-0 flex h-screen items-center"
+        className="sticky top-0 flex h-screen flex-col justify-center gap-10"
         style={{ background: bgColor }}
       >
+        {label && (
+          <p
+            className="font-ui uppercase"
+            style={{
+              fontWeight: 600,
+              fontSize: "16px",
+              lineHeight: "24px",
+              letterSpacing: "0.12em",
+              color: baseColor,
+              opacity: 0.5,
+            }}
+          >
+            {label}
+          </p>
+        )}
         <p
           className="font-ui select-text w-full"
           style={{
