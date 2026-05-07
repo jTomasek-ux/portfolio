@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import GlitchText, { type GlitchTextHandle } from "./GlitchText";
 import F1Car from "./f1Car";
-import F1Lights from "./F1Lights";
 
 /* Arrow icon is now served from public/images/ as a static asset */
 const ARROW_URL = "/images/noun-arrow-3255106.png";
@@ -12,7 +11,6 @@ const ARROW_URL = "/images/noun-arrow-3255106.png";
 interface HeroSectionProps {
   isDark: boolean;
   f1LightsOut?: boolean;
-  onF1LightsOut?: () => void;
 }
 
 /* ─── Shared easing curve ─────────────────────────────────── */
@@ -39,11 +37,7 @@ function ScrollArrowIcon({ className }: { className?: string }) {
   );
 }
 
-export default function HeroSection({
-  isDark,
-  f1LightsOut = false,
-  onF1LightsOut,
-}: HeroSectionProps) {
+export default function HeroSection({ isDark, f1LightsOut = false }: HeroSectionProps) {
   const glitchJan     = useRef<GlitchTextHandle>(null);
   const glitchTomasek = useRef<GlitchTextHandle>(null);
 
@@ -85,9 +79,6 @@ export default function HeroSection({
             className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
             style={{ containerType: "inline-size" }}
           >
-            <div className="flex w-full justify-center">
-              <F1Lights onLightsOut={onF1LightsOut} />
-            </div>
             <F1Car raceAway={f1LightsOut} />
             <motion.p
               className="uppercase"
