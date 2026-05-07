@@ -81,6 +81,13 @@ export default function HeroSection({
         }}
       />
 
+      {/* F1 lights — same vertical band as fixed header (py-6 + items-center); scrolls with hero */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-center px-8 py-6 md:px-12">
+        <div className="pointer-events-auto">
+          <F1Lights onLightsOut={onF1LightsOut} />
+        </div>
+      </div>
+
       {/* ── Main content ── */}
       <div className="relative z-10 flex h-full min-w-0 flex-col px-8 md:px-12 pt-28 pb-10">
         <div className="flex min-h-0 flex-1 flex-col justify-end">
@@ -90,9 +97,6 @@ export default function HeroSection({
             className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
             style={{ containerType: "inline-size" }}
           >
-            <div className="flex w-full justify-center">
-              <F1Lights onLightsOut={onF1LightsOut} />
-            </div>
             <F1Car
               raceAway={f1LightsOut}
               onExitComplete={onF1LeadCarExited}
