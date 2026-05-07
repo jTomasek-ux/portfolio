@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
+import nounArrow from "../../images/noun-arrow-3255106.png";
 
 interface HeroSectionProps {
   isDark: boolean;
@@ -9,11 +11,26 @@ interface HeroSectionProps {
 /* ─── Shared easing curve ─────────────────────────────────── */
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
+function ScrollArrowIcon({ className }: { className?: string }) {
+  return (
+    <Image
+      src={nounArrow}
+      alt=""
+      width={nounArrow.width}
+      height={nounArrow.height}
+      className={`h-[26px] w-auto shrink-0 object-contain ${className ?? ""}`}
+      aria-hidden
+    />
+  );
+}
+
 export default function HeroSection({ isDark }: HeroSectionProps) {
   /* Semantic color aliases that flip on theme change */
   const bg     = isDark ? "#0E0D0C" : "#F0F0EB";
   const cream  = isDark ? "#ECECE7" : "#0E0D0C";
-  const muted  = isDark ? "#93938F" : "#6B6B67";
+  const muted = isDark ? "#93938F" : "#6B6B67";
+  /* Spec oklch(0.205) on light; light neutral on dark for contrast */
+  const scrollFootColor = isDark ? "oklch(0.78 0 0)" : "oklch(0.205 0 0)";
 
   return (
     <section
@@ -38,8 +55,17 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           style={{ containerType: "inline-size" }}
         >
           <motion.p
-            className="font-ui text-[10px] md:text-[11px] tracking-[0.38em] uppercase"
-            style={{ color: muted, transition: "color 0.5s ease" }}
+            className="uppercase"
+            style={{
+              fontFamily:
+                '"Saans", "saans Fallback", var(--font-space-grotesk), sans-serif',
+              fontStyle: "normal",
+              fontWeight: 600,
+              fontSize: "17px",
+              lineHeight: "26px",
+              color: isDark ? "oklch(0.708 0 0)" : "oklch(0.205 0 0)",
+              transition: "color 0.5s ease",
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
@@ -94,27 +120,30 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         </h1>
         </div>
 
-        {/* ── Bio ── */}
-        <motion.p
-          className="mt-4 md:mt-5 w-full max-w-[21.35rem] sm:max-w-sm md:max-w-md"
+        {/* ── Bottom scroll hints ── */}
+        <motion.div
+          className="font-hero-scroll mt-4 flex w-full min-w-0 flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mt-5"
           style={{
-            fontFamily:
-              '"Saans", "saans Fallback", var(--font-space-grotesk), sans-serif',
             fontStyle: "normal",
             fontWeight: 500,
             fontSize: "17px",
             lineHeight: "26px",
-            color: "oklch(0.708 0 0)",
+            color: scrollFootColor,
             transition: "color 0.5s ease",
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0, ease }}
         >
-          Prague raised, Czech Republic based. Building pixel-perfect digital
-          experiences through React, Next.js, and thoughtful frontend
-          engineering.
-        </motion.p>
+          <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+            <ScrollArrowIcon className="shrink-0" />
+            <span className="whitespace-nowrap">Scroll for</span>
+          </div>
+          <div className="flex min-w-0 shrink-0 items-center gap-2.5">
+            <span className="whitespace-nowrap">cool sh*t</span>
+            <ScrollArrowIcon className="shrink-0" />
+          </div>
+        </motion.div>
         </div>
       </div>
     </section>
