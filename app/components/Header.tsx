@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface HeaderProps {
   isDark: boolean;
@@ -17,7 +18,7 @@ export default function Header({ isDark }: HeaderProps) {
       transition={{ duration: 0.7, delay: 0.05, ease }}
     >
       {/* ── Logo ── */}
-      <a
+      <Link
         href="/"
         style={{
           fontFamily: "var(--font-syne), sans-serif",
@@ -30,7 +31,7 @@ export default function Header({ isDark }: HeaderProps) {
         }}
       >
         Jtomasek
-      </a>
+      </Link>
 
       <a
         href="mailto:tomasekjan08@email.cz"

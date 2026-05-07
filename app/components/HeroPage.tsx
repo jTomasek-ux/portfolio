@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
+import AboutSection from "./AboutSection";
 
 export default function HeroPage() {
   const [isDark] = useState(true);
@@ -17,6 +18,7 @@ export default function HeroPage() {
       <Header isDark={isDark} />
       <main>
         <HeroSection isDark={isDark} />
+        <AboutSection />
       </main>
     </>
   );

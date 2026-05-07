@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import nounArrow from "../../images/noun-arrow-3255106.png";
+
+/* Arrow icon is now served from public/images/ as a static asset */
+const ARROW_URL = "/images/noun-arrow-3255106.png";
 
 interface HeroSectionProps {
   isDark: boolean;
@@ -11,16 +13,15 @@ interface HeroSectionProps {
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 function ScrollArrowIcon({ className }: { className?: string }) {
-  const w = Math.round((26 * nounArrow.width) / nounArrow.height);
   return (
     <span
       aria-hidden
       className={`inline-block shrink-0 bg-current transition-colors duration-300 ease-out ${className ?? ""}`}
       style={{
         height: 26,
-        width: w,
-        WebkitMaskImage: `url(${nounArrow.src})`,
-        maskImage: `url(${nounArrow.src})`,
+        width: 26,
+        WebkitMaskImage: `url(${ARROW_URL})`,
+        maskImage: `url(${ARROW_URL})`,
         WebkitMaskSize: "contain",
         maskSize: "contain",
         WebkitMaskRepeat: "no-repeat",
@@ -145,10 +146,10 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         >
           <div className="flex min-w-0 shrink-0 items-center gap-2.5">
             <ScrollArrowIcon className="shrink-0" />
-            <span className="whitespace-nowrap">Scroll for</span>
+            <span className="whitespace-nowrap">Scroll to</span>
           </div>
           <div className="flex min-w-0 shrink-0 items-center gap-2.5">
-            <span className="whitespace-nowrap">cool sh*t</span>
+            <span className="whitespace-nowrap">learn more</span>
             <ScrollArrowIcon className="shrink-0" />
           </div>
         </motion.div>
