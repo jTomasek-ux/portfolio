@@ -29,13 +29,14 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
       />
 
       {/* ── Main content ── */}
-      <div className="relative z-10 flex h-full flex-col px-8 md:px-12 pt-28 pb-10">
-
-        {/* Spacer — pushes role + megatype block toward lower half */}
-        <div className="flex-1 min-h-0" />
-
+      <div className="relative z-10 flex h-full min-w-0 flex-col px-8 md:px-12 pt-28 pb-10">
+        {/* flex-1 + justify-end: pin block to lower half; margin changes are not eaten by a growing spacer */}
+        <div className="flex min-h-0 flex-1 flex-col justify-end">
         {/* Role label + megatype — ½" between label and headline */}
-        <div className="flex flex-col gap-[0.5in]">
+        <div
+          className="flex min-w-0 w-full max-w-full flex-col gap-[0.5in]"
+          style={{ containerType: "inline-size" }}
+        >
           <motion.p
             className="font-ui text-[10px] md:text-[11px] tracking-[0.38em] uppercase"
             style={{ color: muted, transition: "color 0.5s ease" }}
@@ -54,20 +55,21 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         */}
         <h1
           aria-label="Jan Tomasek"
-          className="select-none uppercase -translate-y-[0.5in]"
+          className="w-full min-w-0 max-w-full select-none uppercase -translate-y-[0.5in]"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontStyle: "normal",
             fontWeight: 800,
-            fontSize: "clamp(4rem, 19vw, 173px)",
-            lineHeight: "clamp(3.5rem, 16.7vw, 152px)",
+            /* Longest line “Tomasek” — keep a small right-side safety margin */
+            fontSize: "min(173px, calc(100cqi / 5.18))",
+            lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
             letterSpacing: "normal",
             color: isDark ? "rgb(237, 237, 232)" : cream,
             transition: "color 0.5s ease",
           }}
         >
           {/* Line 1 — "Jan" */}
-          <div className="overflow-hidden">
+          <div className="max-w-full overflow-hidden">
             <motion.span
               className="block"
               initial={{ y: "108%" }}
@@ -79,7 +81,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           </div>
 
           {/* Line 2 — "Tomasek" */}
-          <div className="overflow-hidden">
+          <div className="max-w-full overflow-hidden">
             <motion.span
               className="block"
               initial={{ y: "108%" }}
@@ -94,7 +96,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
 
         {/* ── Bio ── */}
         <motion.p
-          className="font-ui mt-8 md:mt-10 max-w-[260px] text-[13px] leading-[1.7]"
+          className="font-ui mt-4 md:mt-5 w-full max-w-[21.35rem] sm:max-w-sm md:max-w-md text-[15px] font-light leading-[25px]"
           style={{ color: muted, transition: "color 0.5s ease" }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,6 +106,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           experiences through React, Next.js, and thoughtful frontend
           engineering.
         </motion.p>
+        </div>
       </div>
 
       {/* ── Scroll indicator — far right, vertical ── */}

@@ -15,7 +15,7 @@
     font-family: var(--font-unbounded), sans-serif;
   }
   .font-ui {
-    font-family: var(--font-space-grotesk), sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
   }
 }
 

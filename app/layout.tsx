@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Unbounded, Space_Grotesk, Syne } from "next/font/google";
+import { Inter, Unbounded, Syne } from "next/font/google";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -16,10 +16,10 @@ const syne = Syne({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  weight: ["400", "500", "600"],
+const inter = Inter({
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${unbounded.variable} ${syne.variable} ${spaceGrotesk.variable}`}
+      className={`${unbounded.variable} ${syne.variable} ${inter.variable}`}
     >
       {/* Global noise overlay — sits above everything, non-interactive */}
       <body>
