@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import GlitchText, { type GlitchTextHandle } from "./GlitchText";
 import F1Car from "./f1Car";
+import F1CarInverted from "./f1CarInverted";
 
 /* Arrow icon is now served from public/images/ as a static asset */
 const ARROW_URL = "/images/noun-arrow-3255106.png";
@@ -120,15 +121,18 @@ export default function HeroSection({ isDark, f1LightsOut = false }: HeroSection
               onMouseEnter={handleNameEnter}
               onMouseLeave={handleNameLeave}
             >
-              {/* Line 1 */}
+              {/* Line 1 — “Jan” with static inverted car to its right */}
               <div className="max-w-full overflow-hidden">
                 <motion.span
-                  className="block"
+                  className="flex min-w-0 flex-row flex-nowrap items-end gap-[0.08em]"
                   initial={{ y: "108%" }}
                   animate={{ y: "0%" }}
                   transition={{ duration: 1.1, delay: 0.28, ease }}
                 >
-                  <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
+                  <span className="min-w-0 shrink">
+                    <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
+                  </span>
+                  <F1CarInverted className="-translate-y-[0.1em]" />
                 </motion.span>
               </div>
 
