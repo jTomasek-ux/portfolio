@@ -59,7 +59,7 @@ export default function HeroSection({ isDark, f1LightsOut = false }: HeroSection
 
   return (
     <section
-      className="relative h-dvh overflow-x-visible overflow-y-hidden"
+      className="relative h-dvh overflow-hidden"
       style={{ background: bg, transition: "background 0.5s ease" }}
     >
       {/* ── Decorative right-edge hairline ── */}
