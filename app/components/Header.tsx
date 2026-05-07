@@ -6,11 +6,12 @@ import F1Lights from "./F1Lights";
 
 interface HeaderProps {
   isDark: boolean;
+  onF1LightsOut?: () => void;
 }
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
-export default function Header({ isDark }: HeaderProps) {
+export default function Header({ isDark, onF1LightsOut }: HeaderProps) {
   return (
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-12"
@@ -34,7 +35,7 @@ export default function Header({ isDark }: HeaderProps) {
         Jtomasek
       </Link>
 
-      <F1Lights />
+      <F1Lights onLightsOut={onF1LightsOut} />
       
       <a
         href="mailto:tomasekjan08@email.cz"

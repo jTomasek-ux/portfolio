@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAnimate } from "framer-motion";
 
-export default function F1Lights() {
+interface F1LightsProps {
+  onLightsOut?: () => void;
+}
+
+export default function F1Lights({ onLightsOut }: F1LightsProps) {
   const [scope, animate] = useAnimate();
+  const onLightsOutRef = useRef(onLightsOut);
+  onLightsOutRef.current = onLightsOut;
 
   useEffect(() => {
     let cancelled = false;
@@ -31,8 +37,17 @@ export default function F1Lights() {
       });
       if (cancelled) return;
 
-      /* Lights out — all off together */
-      await animate(".f1-light", { opacity: 0.1, scale: 1 }, { duration: 3.5 });
+      /* Lights out — all off together (GO) */
+      await animate(".f1-light", { opacity: 0.1, scale: 1 }, { duration: 0.1 });
+      if (cancelled) return;
+      onLightsOutRef.current?.();
+
+      /* 2s pause: fully dark before the repeat blink */
+      await animate(".f1-light", { opacity: 0.1, scale: 1 }, { duration: 0.2 });
+      if (cancelled) return;
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 2000);
+      });
       if (cancelled) return;
 
       /* All five blink on/off in sync, repeating */
