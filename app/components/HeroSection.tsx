@@ -55,7 +55,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         */}
         <h1
           aria-label="Jan Tomasek"
-          className="w-full min-w-0 max-w-full select-none uppercase -translate-y-[0.5in]"
+          className="w-full min-w-0 max-w-full select-none -translate-y-[0.5in]"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontStyle: "normal",

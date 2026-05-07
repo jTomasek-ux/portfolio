@@ -25,7 +25,6 @@ export default function Header({ isDark, onToggle }: HeaderProps) {
       {/* ── Logo ── */}
       <a
         href="/"
-        className="transition-transform duration-200 hover:-translate-y-px"
         style={{
           fontFamily: "var(--font-syne), sans-serif",
           fontStyle: "normal",
