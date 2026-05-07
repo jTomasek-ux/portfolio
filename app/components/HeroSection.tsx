@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import nounArrow from "../../images/noun-arrow-3255106.png";
 
@@ -12,14 +11,23 @@ interface HeroSectionProps {
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 function ScrollArrowIcon({ className }: { className?: string }) {
+  const w = Math.round((26 * nounArrow.width) / nounArrow.height);
   return (
-    <Image
-      src={nounArrow}
-      alt=""
-      width={nounArrow.width}
-      height={nounArrow.height}
-      className={`h-[26px] w-auto shrink-0 object-contain ${className ?? ""}`}
+    <span
       aria-hidden
+      className={`inline-block shrink-0 bg-current transition-colors duration-300 ease-out ${className ?? ""}`}
+      style={{
+        height: 26,
+        width: w,
+        WebkitMaskImage: `url(${nounArrow.src})`,
+        maskImage: `url(${nounArrow.src})`,
+        WebkitMaskSize: "contain",
+        maskSize: "contain",
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+        WebkitMaskPosition: "center",
+        maskPosition: "center",
+      }}
     />
   );
 }
