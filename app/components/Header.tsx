@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import F1Lights from "./F1Lights";
 
 interface HeaderProps {
   isDark: boolean;
@@ -33,6 +34,8 @@ export default function Header({ isDark }: HeaderProps) {
         Jtomasek
       </Link>
 
+      <F1Lights />
+      
       <a
         href="mailto:tomasekjan08@email.cz"
         className="group inline-flex items-center justify-center rounded-full bg-[#ebd8c9] px-6 py-3 font-cta text-[17px] font-semibold leading-[26px] text-[#171717] no-underline outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]"
