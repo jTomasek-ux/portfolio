@@ -121,7 +121,7 @@ export default function HeroSection({ isDark, f1LightsOut = false }: HeroSection
               onMouseEnter={handleNameEnter}
               onMouseLeave={handleNameLeave}
             >
-              {/* Line 1 — “Jan” with static inverted car to its right */}
+              {/* Line 1 — “Jan” + inverted car (slides in from the right) */}
               <div className="max-w-full overflow-hidden">
                 <motion.span
                   className="flex min-w-0 flex-row flex-nowrap items-end gap-[0.08em]"

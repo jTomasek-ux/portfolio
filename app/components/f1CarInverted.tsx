@@ -1,24 +1,39 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
+
+/** Strong ease-out — fast start, heavy settle at the end (counterpart vibe to `easeInHeavy` on `F1Car`). */
+const easeOutHeavy: [number, number, number, number] = [0.33, 1, 0.68, 1];
+
 interface F1CarInvertedProps {
   className?: string;
 }
 
-/** Mirrored F1 car — static; wrapper + SVG sizing match `F1Car`. */
+/** Mirrored F1 car; wrapper + SVG sizing match `F1Car`. Slides in from the right on mount. */
 export default function F1CarInverted({ className }: F1CarInvertedProps) {
+  const reduceMotion = useReducedMotion();
+
+  const transition = reduceMotion
+    ? { duration: 0.4, delay: 0.05, ease: "linear" as const }
+    : { duration: 1.95, delay: 0.32, ease: easeOutHeavy };
+
   return (
-    <div
-      className={`pointer-events-none w-[min(100%,min(92cqi,300px))] max-w-[min(100%,min(92cqi,300px))] shrink-0 flex-none ${className ?? ""}`}
+    <motion.div
+      className="pointer-events-none w-[min(100%,min(92cqi,300px))] max-w-[min(100%,min(92cqi,300px))] shrink-0 flex-none"
       aria-hidden
+      initial={{ x: "120vw" }}
+      animate={{ x: 0 }}
+      transition={transition}
     >
-      <svg
-        width={1086}
-        height={461}
-        viewBox="0 0 1086 461"
-        fill="none"
-        className="h-auto w-full"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <div className={className ? `w-full ${className}` : "w-full"}>
+        <svg
+          width={1086}
+          height={461}
+          viewBox="0 0 1086 461"
+          fill="none"
+          className="h-auto w-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
         <path
           d="M43.3891 226.087C35.5242 227.34 35.5243 238.66 43.3891 239.913L562.649 322.642C566.9 323.319 570.75 320.034 570.75 315.729V150.271C570.75 145.966 566.9 142.681 562.649 143.358L43.3891 226.087Z"
           fill="#A6051A"
@@ -134,7 +149,8 @@ export default function F1CarInverted({ className }: F1CarInvertedProps) {
           transform="matrix(-1 0 0 1 919 177)"
           fill="#A6051A"
         />
-      </svg>
-    </div>
+        </svg>
+      </div>
+    </motion.div>
   );
 }
