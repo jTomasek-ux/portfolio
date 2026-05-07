@@ -26,7 +26,7 @@ export default function Header({ isDark }: HeaderProps) {
           fontWeight: 800,
           fontSize: "15px",
           lineHeight: "normal",
-          color: isDark ? "rgb(237, 237, 232)" : "#0E0D0C",
+          color: isDark ? "#ebd8c9" : "#171717",
           transition: "color 0.5s ease",
         }}
       >
@@ -35,7 +35,7 @@ export default function Header({ isDark }: HeaderProps) {
 
       <a
         href="mailto:tomasekjan08@email.cz"
-        className="group inline-flex items-center justify-center rounded-full bg-[#EBEBE6] px-6 py-3 font-cta text-[17px] font-semibold leading-[26px] text-[#131211] no-underline outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#131211] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0D0C]"
+        className="group inline-flex items-center justify-center rounded-full bg-[#ebd8c9] px-6 py-3 font-cta text-[17px] font-semibold leading-[26px] text-[#171717] no-underline outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]"
       >
         <span className="block h-[26px] overflow-hidden">
           <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-[26px] motion-reduce:group-hover:translate-y-0">

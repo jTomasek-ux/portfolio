@@ -11,9 +11,9 @@
 
 /* ─── Design Tokens ──────────────────────────────────────── */
 @theme {
-  --color-bg-dark:  #0E0D0C;
-  --color-bg-light: #F0F0EB;
-  --color-cream:    #ECECE7;
+  --color-bg-dark:  #171717;
+  --color-bg-light: #ebd8c9;
+  --color-cream:    #ebd8c9;
   --color-muted:    #93938F;
   --color-accent:   #4ADE80;
 }
@@ -51,8 +51,8 @@ html {
 
 body {
   margin: 0;
-  background: #0E0D0C;
-  color: #ECECE7;
+  background: #171717;
+  color: #ebd8c9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -60,7 +60,7 @@ body {
 
 ::selection {
   background: #ffffc5;
-  color: #0e0d0c;
+  color: #171717;
 }
 
 /* ─── Minimal Scrollbar ──────────────────────────────────── */
@@ -68,7 +68,7 @@ body {
   width: 2px;
 }
 ::-webkit-scrollbar-track {
-  background: #0E0D0C;
+  background: #171717;
 }
 ::-webkit-scrollbar-thumb {
   background: #93938F;

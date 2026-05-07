@@ -10,7 +10,7 @@ export default function HeroPage() {
 
   /* Keep the html background in sync to prevent flash on scroll overscroll */
   useEffect(() => {
-    document.documentElement.style.background = isDark ? "#0E0D0C" : "#F0F0EB";
+    document.documentElement.style.background = isDark ? "#171717" : "#ebd8c9";
   }, [isDark]);
 
   return (

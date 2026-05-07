@@ -49,11 +49,11 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
   };
 
   /* Semantic color aliases that flip on theme change */
-  const bg    = isDark ? "#0E0D0C" : "#F0F0EB";
-  const cream = isDark ? "#ECECE7" : "#0E0D0C";
+  const bg    = isDark ? "#171717" : "#ebd8c9";
+  const cream = isDark ? "#ebd8c9" : "#171717";
   const muted = isDark ? "#93938F" : "#6B6B67";
   const scrollFootColor = isDark ? "oklch(0.78 0 0)" : "oklch(0.205 0 0)";
-  const nameColor       = isDark ? "rgb(237, 237, 232)" : cream;
+  const nameColor       = isDark ? "#ebd8c9" : cream;
 
   return (
     <section

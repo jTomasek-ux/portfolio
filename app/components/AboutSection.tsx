@@ -7,8 +7,8 @@ import ScrollRevealText from "./ScrollRevealText";
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
-const BG   = "#ECECE7";
-const TEXT = "#0E0D0C";
+const BG   = "#F1E4DA";
+const TEXT = "#171717";
 
 const BIO =
   "I'm a 17-year-old design engineer obsessed with the intersection of sharp aesthetics and modern web tech. " +
