@@ -96,8 +96,17 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
 
         {/* ── Bio ── */}
         <motion.p
-          className="font-ui mt-4 md:mt-5 w-full max-w-[21.35rem] sm:max-w-sm md:max-w-md text-[15px] font-light leading-[25px]"
-          style={{ color: muted, transition: "color 0.5s ease" }}
+          className="mt-4 md:mt-5 w-full max-w-[21.35rem] sm:max-w-sm md:max-w-md"
+          style={{
+            fontFamily:
+              '"Saans", "saans Fallback", var(--font-space-grotesk), sans-serif',
+            fontStyle: "normal",
+            fontWeight: 500,
+            fontSize: "17px",
+            lineHeight: "26px",
+            color: "oklch(0.708 0 0)",
+            transition: "color 0.5s ease",
+          }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0, ease }}
@@ -107,37 +116,6 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           engineering.
         </motion.p>
         </div>
-      </div>
-
-      {/* ── Scroll indicator — far right, vertical ── */}
-      <div className="pointer-events-none absolute right-8 md:right-10 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-3">
-        <motion.div
-          className="w-px origin-top"
-          style={{ height: 52, background: `linear-gradient(to bottom, transparent, ${muted}35)` }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.5, ease }}
-        />
-        <motion.span
-          className="font-ui text-[9px] tracking-[0.48em] uppercase"
-          style={{
-            color: `${muted}80`,
-            writingMode: "vertical-rl",
-            textOrientation: "mixed",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 1.7, ease: "easeOut" }}
-        >
-          Scroll
-        </motion.span>
-        <motion.div
-          className="w-px origin-bottom"
-          style={{ height: 28, background: `linear-gradient(to top, transparent, ${muted}35)` }}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.5, ease }}
-        />
       </div>
     </section>
   );
