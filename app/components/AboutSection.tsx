@@ -21,7 +21,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16">
 
           {/* ── Left: label + paragraph stacked, so label aligns with top of photo ── */}
-          <div className="flex flex-col gap-10 md:gap-12">
+          <div className="flex flex-col gap-10 md:gap-12 lg:pt-10">
             <motion.p
               className="font-ui uppercase"
               style={{
@@ -47,17 +47,19 @@ export default function AboutSection() {
                 lineHeight: 1.1,
                 color: "oklch(0.205 0 0)",
                 textAlign: "justify",
-                hyphens: "auto",
+                hyphens: "none",
+                WebkitHyphens: "none",
+                msHyphens: "none",
               }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.1, ease }}
               viewport={{ once: true, margin: "-80px" }}
             >
-              Passionate about merging design and engineering, I craft smooth,
-              interactive experiences with purpose. With a focus on motion,
-              performance, and detail, I help bring digital products to life for
-              forward-thinking brands around the world.
+              I&apos;m a 17-year-old design engineer obsessed with the intersection of sharp aesthetics and modern web tech.
+              I don&apos;t just design interfaces; I build them with Next.js, Tailwind, and Framer Motion.
+              Currently looking for a summer internship to absorb as much knowledge as possible, learn from experienced teams,
+              and gain hands-on, real-world experience.
             </motion.h2>
           </div>
 
