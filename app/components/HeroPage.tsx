@@ -25,11 +25,12 @@ export default function HeroPage() {
 
   return (
     <>
-      <Header isDark={isDark} onF1LightsOut={handleF1LightsOut} />
+      <Header isDark={isDark} />
       <main>
         <HeroSection
           isDark={isDark}
           f1LightsOut={f1LightsOut}
+          onF1LightsOut={handleF1LightsOut}
           f1LeadCarExited={f1LeadCarExited}
           onF1LeadCarExited={handleF1LeadCarExited}
         />

@@ -2,11 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import F1Lights from "./F1Lights";
 
 interface HeaderProps {
   isDark: boolean;
-  onF1LightsOut?: () => void;
 }
 
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
@@ -17,7 +15,7 @@ const reveal = {
   transition: { duration: 0.7, delay: 0.05, ease },
 } as const;
 
-export default function Header({ isDark, onF1LightsOut }: HeaderProps) {
+export default function Header({ isDark }: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-12">
       <motion.div className="shrink-0" {...reveal}>
@@ -36,8 +34,6 @@ export default function Header({ isDark, onF1LightsOut }: HeaderProps) {
           Jtomasek
         </Link>
       </motion.div>
-
-      <F1Lights onLightsOut={onF1LightsOut} />
 
       <motion.div className="shrink-0" {...reveal}>
         <a
