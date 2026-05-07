@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Unbounded, Space_Grotesk } from "next/font/google";
+import { Unbounded, Space_Grotesk, Syne } from "next/font/google";
 import "./globals.css";
 
 const unbounded = Unbounded({
   weight: ["700", "900"],
   subsets: ["latin"],
   variable: "--font-unbounded",
+  display: "swap",
+});
+
+const syne = Syne({
+  weight: "800",
+  subsets: ["latin"],
+  variable: "--font-syne",
   display: "swap",
 });
 
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${unbounded.variable} ${spaceGrotesk.variable}`}
+      className={`${unbounded.variable} ${syne.variable} ${spaceGrotesk.variable}`}
     >
       {/* Global noise overlay — sits above everything, non-interactive */}
       <body>

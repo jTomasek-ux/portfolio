@@ -12,7 +12,6 @@ const NAV_LINKS = ["Work", "About", "Contact"] as const;
 const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 export default function Header({ isDark, onToggle }: HeaderProps) {
-  const logoColor   = isDark ? "#ECECE7" : "#0E0D0C";
   const linkColor   = isDark ? "#93938F" : "#6B6B67";
   const borderColor = isDark ? "rgba(236,236,231,0.15)" : "rgba(14,13,12,0.15)";
 
@@ -26,8 +25,16 @@ export default function Header({ isDark, onToggle }: HeaderProps) {
       {/* ── Logo ── */}
       <a
         href="/"
-        className="font-ui text-[11px] tracking-[0.22em] uppercase transition-transform duration-200 hover:-translate-y-px"
-        style={{ color: logoColor, transition: "color 0.5s ease" }}
+        className="inline-block overflow-visible pb-0.5 transition-transform duration-200 hover:-translate-y-px"
+        style={{
+          fontFamily: "var(--font-syne), sans-serif",
+          fontStyle: "normal",
+          fontWeight: 800,
+          fontSize: "15px",
+          lineHeight: 1.35,
+          color: isDark ? "rgb(237, 237, 232)" : "#0E0D0C",
+          transition: "color 0.5s ease",
+        }}
       >
         jtomasek
       </a>

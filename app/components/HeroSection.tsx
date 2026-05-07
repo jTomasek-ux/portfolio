@@ -45,23 +45,23 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         {/* Flex spacer — pushes megatype toward lower half */}
         <div className="flex-1" />
 
-        {/* ── Megatype ── */}
+        {/* ── Megatype — Syne 800 (design spec) ── */}
         {/*
           Each line is wrapped in overflow-hidden so the span can slide
           up from y:108% creating the editorial "text reveal" effect.
-          The font fills edge-to-edge by using ~19vw — at this size
-          "Tomasek" (7 chars in Unbounded 900) fills ~95% of the viewport.
+          Desktop: 173px / 152px line-height, rgb(237,237,232); scales down on narrow viewports.
         */}
         <h1
           aria-label="Jan Tomasek"
           className="select-none uppercase"
           style={{
-            fontFamily: "var(--font-unbounded), sans-serif",
-            fontWeight: 900,
-            fontSize: "19vw",
-            lineHeight: 0.83,
-            letterSpacing: "-0.025em",
-            color: cream,
+            fontFamily: "var(--font-syne), sans-serif",
+            fontStyle: "normal",
+            fontWeight: 800,
+            fontSize: "clamp(4rem, 19vw, 173px)",
+            lineHeight: "clamp(3.5rem, 16.7vw, 152px)",
+            letterSpacing: "normal",
+            color: isDark ? "rgb(237, 237, 232)" : cream,
             transition: "color 0.5s ease",
           }}
         >
