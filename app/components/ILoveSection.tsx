@@ -17,7 +17,7 @@ export default function ILoveSection() {
             letterSpacing: "-0.02em",
           }}
         >
-          I LOVE CREATING COOL SH*T
+          &quot;I LOVE CREATING COOL SH*T&quot;
         </p>
       </div>
     </section>
