@@ -1,7 +1,7 @@
 "use client";
 
+import type { MouseEvent } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 interface HeaderProps {
   isDark: boolean;
@@ -15,12 +15,24 @@ const reveal = {
   transition: { duration: 0.7, delay: 0.05, ease },
 } as const;
 
+function goHomeFullReload() {
+  window.location.assign("/");
+}
+
+function handleHomeClick(e: MouseEvent<HTMLAnchorElement>) {
+  if (e.button !== 0) return;
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  goHomeFullReload();
+}
+
 export default function Header({ isDark }: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 md:px-12">
       <motion.div className="shrink-0" {...reveal}>
-        <Link
+        <a
           href="/"
+          onClick={handleHomeClick}
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontStyle: "normal",
@@ -32,7 +44,7 @@ export default function Header({ isDark }: HeaderProps) {
           }}
         >
           Jtomasek
-        </Link>
+        </a>
       </motion.div>
 
       <motion.div className="shrink-0" {...reveal}>

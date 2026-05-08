@@ -210,7 +210,7 @@ export default function ContactSection() {
         className="border-t border-black/8"
         style={{ background: BG, color: TEXT }}
       >
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-8 py-6 text-sm md:flex-row md:items-center md:justify-between md:gap-6 md:px-12 md:py-7">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 px-8 py-6 text-sm md:flex-row md:items-center md:justify-between md:gap-6 md:px-12 md:py-7">
           <p className="font-ui m-0 leading-relaxed" style={{ color: MUTED }}>
             © {year} Jan Tomasek · Czech Republic ·{" "}
             <a
@@ -225,7 +225,7 @@ export default function ContactSection() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="group inline-flex shrink-0 cursor-pointer items-center border-0 bg-transparent p-0 text-left font-ui text-sm font-medium text-inherit underline decoration-black/25 underline-offset-[6px] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark"
+            className="group -mt-1 inline-flex shrink-0 cursor-pointer items-center self-end border-0 bg-transparent p-0 text-right font-ui text-sm font-medium text-inherit underline decoration-black/25 underline-offset-[6px] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark md:mt-0 md:self-auto md:text-left"
           >
             <FooterSlidingLines label="Back to top" />
           </button>
