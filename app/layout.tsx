@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Unbounded, Syne } from "next/font/google";
+import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -68,7 +69,7 @@ export default function RootLayout({
             <rect width="100%" height="100%" filter="url(#global-noise)" />
           </svg>
         </div>
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

@@ -1,0 +1,227 @@
+"use client";
+
+import { useCallback } from "react";
+import type { CSSProperties } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+
+import { getRootLenis } from "../lib/lenisRoot";
+
+const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const BG = "#F1E4DA";
+const TEXT = "#171717";
+const MUTED = "rgba(23, 23, 23, 0.55)";
+
+/** Email: default black; hover previous muted gray */
+const emailColorStates =
+  "text-[#171717] decoration-black/35 transition-[color,text-decoration-color] duration-200 hover:text-[rgba(23,23,23,0.55)] hover:decoration-[rgba(23,23,23,0.35)]";
+
+const EMAIL = "tomasekjan08@email.cz";
+const MAILTO = `mailto:${EMAIL}`;
+
+/** Syne + clamp size — shared by “So let’s talk” and the mail link */
+const SO_LETS_TALK_FONT: CSSProperties = {
+  fontFamily: "var(--font-syne), sans-serif",
+  fontWeight: 800,
+  fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+  lineHeight: 1.15,
+  letterSpacing: "-0.02em",
+};
+
+/** Add public profile URLs when ready; omitted links are not shown. */
+const GITHUB_URL: string | null = null;
+const LINKEDIN_URL: string | null = null;
+
+/** Subtle finish-line checkered strip (F1 tie-in) */
+function F1FinishStrip() {
+  return (
+    <div
+      className="h-2.5 w-full shrink-0 border-b border-black/6"
+      style={{
+        backgroundImage: `repeating-conic-gradient(
+          from 45deg,
+          rgba(23, 23, 23, 0.14) 0% 25%,
+          transparent 0% 50%
+        )`,
+        backgroundSize: "10px 10px",
+      }}
+      aria-hidden
+    />
+  );
+}
+
+/** Slide-up duplicate label (same idea as Header “Get in touch”) */
+function FooterSlidingLines({ label }: { label: string }) {
+  return (
+    <span className="block h-5 overflow-hidden">
+      <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-5 motion-reduce:group-hover:translate-y-0">
+        <span className="block h-5 shrink-0 leading-5 whitespace-nowrap">{label}</span>
+        <span className="block h-5 shrink-0 leading-5 whitespace-nowrap" aria-hidden>
+          {label}
+        </span>
+      </span>
+    </span>
+  );
+}
+
+/** Same slide pattern for Syne / SO_LETS_TALK_FONT (line-height 1.15, em-relative clip) */
+function SyneSlidingDuplicate({ text }: { text: string }) {
+  return (
+    <span className="block h-[1.15em] overflow-hidden">
+      <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:translate-y-[-1.15em] motion-reduce:group-hover:translate-y-0">
+        <span className="block h-[1.15em] shrink-0 leading-[1.15] whitespace-nowrap">
+          {text}
+        </span>
+        <span
+          className="block h-[1.15em] shrink-0 leading-[1.15] whitespace-nowrap"
+          aria-hidden
+        >
+          {text}
+        </span>
+      </span>
+    </span>
+  );
+}
+
+export default function ContactSection() {
+  const reduceMotion = useReducedMotion();
+
+  const links: { label: string; href: string; external?: boolean }[] = [
+    ...(GITHUB_URL
+      ? [{ label: "GitHub", href: GITHUB_URL, external: true as const }]
+      : []),
+    ...(LINKEDIN_URL
+      ? [{ label: "LinkedIn", href: LINKEDIN_URL, external: true as const }]
+      : []),
+  ];
+
+  const scrollToTop = useCallback(() => {
+    const lenis = getRootLenis();
+    if (reduceMotion) {
+      lenis?.scrollTo(0, { immediate: true });
+      if (!lenis) window.scrollTo(0, 0);
+      return;
+    }
+    if (lenis) {
+      lenis.scrollTo(0, {
+        duration: 1.35,
+        easing: (t) => 1 - (1 - t) ** 3,
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [reduceMotion]);
+
+  const year = new Date().getFullYear();
+
+  const linkItemTransition = (i: number) =>
+    reduceMotion
+      ? { duration: 0 }
+      : { duration: 0.55, delay: 0.12 + i * 0.06, ease };
+
+  return (
+    <footer
+      id="contact"
+      aria-label="Contact and site information"
+      style={{ background: BG, color: TEXT }}
+    >
+      <F1FinishStrip />
+
+      <div className="relative overflow-hidden">
+        {/* Oversized watermark — low contrast, non-interactive */}
+        <p
+          className="pointer-events-none absolute right-[-2%] bottom-[-18%] m-0 select-none whitespace-nowrap"
+          style={{
+            fontFamily: "var(--font-syne), sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(4.25rem, 18vw, 11.5rem)",
+            lineHeight: 0.85,
+            letterSpacing: "-0.02em",
+            /* #1B1B1B via alpha — separate opacity made it read gray */
+            color: "rgba(27, 27, 27, 0.22)",
+          }}
+          aria-hidden
+        >
+          Jtomasek
+        </p>
+
+        <div className="relative mx-auto max-w-[1400px] px-8 pb-14 pt-16 md:px-12 md:pb-16 md:pt-20 lg:pb-20 lg:pt-24">
+          <motion.div
+            className="flex flex-col gap-6 md:gap-8"
+            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: reduceMotion ? 0 : 0.7, ease }}
+          >
+            <div className="ml-auto mr-12 flex w-max max-w-full flex-row flex-wrap items-baseline gap-x-3 gap-y-2 sm:mr-14 sm:gap-x-4 md:mr-18 md:gap-x-5">
+              <h2 className="m-0 shrink-0" style={SO_LETS_TALK_FONT}>
+                So let&apos;s talk
+              </h2>
+              <a
+                href={MAILTO}
+                style={SO_LETS_TALK_FONT}
+                className={`group inline-flex shrink-0 items-baseline underline underline-offset-[6px] ${emailColorStates} focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark`}
+              >
+                <SyneSlidingDuplicate text={EMAIL} />
+              </a>
+            </div>
+
+            {links.length > 0 ? (
+              <nav aria-label="Contact links">
+                <ul className="m-0 flex list-none flex-col gap-3 p-0 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-3">
+                  {links.map((link, i) => (
+                    <motion.li
+                      key={link.label}
+                      initial={
+                        reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }
+                      }
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={linkItemTransition(i)}
+                    >
+                      <a
+                        href={link.href}
+                        className="font-ui text-lg font-medium underline decoration-black/25 underline-offset-[6px] transition-[color,text-decoration-color] duration-200 hover:text-accent hover:decoration-accent md:text-xl"
+                        {...(link.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+            ) : null}
+          </motion.div>
+        </div>
+      </div>
+
+      <div
+        className="border-t border-black/8"
+        style={{ background: BG, color: TEXT }}
+      >
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-8 py-6 text-sm md:flex-row md:items-center md:justify-between md:gap-6 md:px-12 md:py-7">
+          <p className="font-ui m-0 leading-relaxed" style={{ color: MUTED }}>
+            © {year} Jan Tomasek · Czech Republic ·{" "}
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center font-ui text-sm font-medium underline decoration-black/20 underline-offset-4"
+            >
+              <FooterSlidingLines label="Built with Next.js" />
+            </a>
+          </p>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="group inline-flex shrink-0 cursor-pointer items-center border-0 bg-transparent p-0 text-left font-ui text-sm font-medium text-inherit underline decoration-black/25 underline-offset-[6px] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark"
+          >
+            <FooterSlidingLines label="Back to top" />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+}

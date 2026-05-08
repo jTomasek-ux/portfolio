@@ -70,6 +70,7 @@ export default function HeroSection({
 
   return (
     <section
+      id="top"
       className="relative h-dvh overflow-hidden"
       style={{ background: bg, transition: "background 0.5s ease" }}
     >

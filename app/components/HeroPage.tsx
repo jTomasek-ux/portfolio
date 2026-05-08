@@ -5,6 +5,8 @@ import Header from "./Header";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ILoveSection from "./ILoveSection";
+import ProcessSection from "./ProcessSection";
+import ContactSection from "./ContactSection";
 
 export default function HeroPage() {
   const [isDark] = useState(true);
@@ -37,7 +39,9 @@ export default function HeroPage() {
         />
         <AboutSection />
         <ILoveSection />
+        <ProcessSection />
       </main>
+      <ContactSection />
     </>
   );
 }
