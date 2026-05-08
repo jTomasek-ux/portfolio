@@ -38,14 +38,14 @@ export default function Header({ isDark }: HeaderProps) {
       <motion.div className="shrink-0" {...reveal}>
         <a
           href="mailto:tomasekjan08@email.cz"
-          className="group inline-flex items-center justify-center rounded-full bg-[#ebd8c9] px-6 py-3 font-cta text-[17px] font-semibold leading-[26px] text-[#171717] no-underline outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]"
+          className="group inline-flex items-center justify-center rounded-full bg-[#ebd8c9] px-4 py-2 text-[14px] font-semibold leading-[22px] text-[#171717] no-underline outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717] font-cta md:px-6 md:py-3 md:text-[17px] md:leading-[26px]"
         >
-          <span className="block h-[26px] overflow-hidden">
-            <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-[26px] motion-reduce:group-hover:translate-y-0">
-              <span className="block h-[26px] shrink-0 leading-[26px] whitespace-nowrap">
+          <span className="block h-[22px] overflow-hidden md:h-[26px]">
+            <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-[22px] motion-reduce:group-hover:translate-y-0 md:group-hover:-translate-y-[26px]">
+              <span className="block h-[22px] shrink-0 leading-[22px] whitespace-nowrap md:h-[26px] md:leading-[26px]">
                 Get in touch
               </span>
-              <span className="block h-[26px] shrink-0 leading-[26px] whitespace-nowrap">
+              <span className="block h-[22px] shrink-0 leading-[22px] whitespace-nowrap md:h-[26px] md:leading-[26px]">
                 Get in touch
               </span>
             </span>

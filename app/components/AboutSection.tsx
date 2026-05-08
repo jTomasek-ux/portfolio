@@ -18,19 +18,29 @@ const BIO =
 
 export default function AboutSection() {
   return (
-    <section id="about" style={{ background: BG }}>
+    <section
+      id="about"
+      className="pb-[min(32vh,12rem)] lg:pb-0"
+      style={{ background: BG }}
+    >
       <div className="mx-auto max-w-[1400px] px-8 md:px-12">
 
         {/* ── Two-column: scroll-reveal text (with label inside) | sticky photo ── */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16 py-20 md:py-28 lg:py-32">
 
-          {/* Left: h-[200vh] sticky word scramble — label lives inside */}
-          <ScrollRevealText text={BIO} baseColor={TEXT} bgColor={BG} label="About Me" />
+          {/* Left: scroll-reveal — second on mobile so portrait can lead */}
+          <ScrollRevealText
+            className="order-2 min-w-0 lg:order-none"
+            text={BIO}
+            baseColor={TEXT}
+            bgColor={BG}
+            label="About Me"
+          />
 
-          {/* Right: photo stays pinned while you scroll through the text */}
-          <div className="hidden lg:mt-10 lg:block lg:sticky lg:top-[15vh] lg:self-start">
+          {/* Right (lg): sticky photo; mobile: visible, full-width / capped width */}
+          <div className="order-1 w-full lg:order-none lg:mt-10 lg:sticky lg:top-[15vh] lg:self-start">
             <motion.div
-              className="relative w-full overflow-hidden rounded-2xl"
+              className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl lg:mx-0 lg:max-w-none"
               style={{ aspectRatio: "5 / 6" }}
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -42,7 +52,7 @@ export default function AboutSection() {
                 alt="Jan Tomasek"
                 fill
                 className="object-cover"
-                sizes="40vw"
+                sizes="(max-width: 1023px) min(90vw, 448px), 40vw"
               />
             </motion.div>
           </div>

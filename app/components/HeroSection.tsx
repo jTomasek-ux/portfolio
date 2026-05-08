@@ -82,10 +82,23 @@ export default function HeroSection({
         }}
       />
 
-      {/* F1 lights — same vertical band as fixed header (py-6 + items-center); scrolls with hero */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-center px-8 py-6 md:px-12">
+      {/* F1 lights — same vertical band as fixed header on desktop; slightly lower on mobile */}
+      <div className="pointer-events-none absolute inset-x-0 top-16 z-20 flex items-center justify-center px-8 py-6 md:top-0 md:px-12">
         <div className="pointer-events-auto">
           <F1Lights onLightsOut={onF1LightsOut} />
+        </div>
+      </div>
+
+      {/*
+        Mobile only: inverted car sits in the visual center of the hero and uses the same
+        slide-in as desktop after the lead car exits (desktop keeps the car in the headline row).
+      */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[8] flex items-center justify-center md:hidden"
+        aria-hidden
+      >
+        <div className="w-[min(72vw,260px)] max-w-[280px] shrink-0">
+          <F1CarInverted slideIn={f1LeadCarExited} className="-translate-y-[0.1em]" />
         </div>
       </div>
 
@@ -133,8 +146,6 @@ export default function HeroSection({
                 fontFamily: "var(--font-syne), sans-serif",
                 fontStyle: "normal",
                 fontWeight: 800,
-                fontSize: "min(173px, calc(100cqi / 5.18))",
-                lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
                 letterSpacing: "normal",
                 color: nameColor,
                 transition: "color 0.5s ease",
@@ -142,34 +153,61 @@ export default function HeroSection({
               onMouseEnter={handleNameEnter}
               onMouseLeave={handleNameLeave}
             >
-              {/* Line 1 — “Jan” + inverted car (slides in from the right) */}
-              <div className="max-w-full overflow-hidden">
-                <motion.span
-                  className="flex min-w-0 flex-row flex-nowrap items-end gap-[0.08em]"
-                  initial={{ y: "108%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 1.1, delay: 0.28, ease }}
-                >
-                  <span className="min-w-0 shrink">
-                    <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
-                  </span>
-                  <F1CarInverted
-                    slideIn={f1LeadCarExited}
-                    className="-translate-y-[0.1em]"
-                  />
-                </motion.span>
-              </div>
-
-              {/* Line 2 */}
-              <div className="max-w-full overflow-hidden">
+              {/* Mobile — single line, smaller type (desktop unchanged below) */}
+              <div className="max-w-full overflow-hidden md:hidden">
                 <motion.span
                   className="block"
                   initial={{ y: "108%" }}
                   animate={{ y: "0%" }}
-                  transition={{ duration: 1.1, delay: 0.44, ease }}
+                  transition={{ duration: 1.1, delay: 0.28, ease }}
+                  style={{
+                    fontSize: "clamp(1.75rem, 6.5vw, 2.5rem)",
+                    lineHeight: 1.08,
+                  }}
                 >
-                  <GlitchText ref={glitchTomasek} text="Tomasek" baseColor={nameColor} />
+                  Jan Tomasek
                 </motion.span>
+              </div>
+
+              {/* Desktop — megatype + glitch + inverted car (md+) */}
+              <div className="hidden md:contents">
+                {/* Line 1 — “Jan” + inverted car (slides in from the right) */}
+                <div className="max-w-full overflow-hidden">
+                  <motion.span
+                    className="flex min-w-0 flex-row flex-nowrap items-end gap-[0.08em]"
+                    initial={{ y: "108%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 1.1, delay: 0.28, ease }}
+                    style={{
+                      fontSize: "min(173px, calc(100cqi / 5.18))",
+                      lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
+                    }}
+                  >
+                    <span className="min-w-0 shrink">
+                      <GlitchText ref={glitchJan} text="Jan" baseColor={nameColor} />
+                    </span>
+                    <F1CarInverted
+                      slideIn={f1LeadCarExited}
+                      className="-translate-y-[0.1em]"
+                    />
+                  </motion.span>
+                </div>
+
+                {/* Line 2 */}
+                <div className="max-w-full overflow-hidden">
+                  <motion.span
+                    className="block"
+                    initial={{ y: "108%" }}
+                    animate={{ y: "0%" }}
+                    transition={{ duration: 1.1, delay: 0.44, ease }}
+                    style={{
+                      fontSize: "min(173px, calc(100cqi / 5.18))",
+                      lineHeight: "min(152px, calc(100cqi / 5.18 * 0.8786))",
+                    }}
+                  >
+                    <GlitchText ref={glitchTomasek} text="Tomasek" baseColor={nameColor} />
+                  </motion.span>
+                </div>
               </div>
             </h1>
           </div>

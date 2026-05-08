@@ -126,13 +126,12 @@ export default function ContactSection() {
       <F1FinishStrip />
 
       <div className="relative overflow-hidden">
-        {/* Oversized watermark — low contrast, non-interactive */}
+        {/* Oversized watermark — low contrast; contained + centered on mobile */}
         <p
-          className="pointer-events-none absolute right-[-2%] bottom-[-18%] m-0 select-none whitespace-nowrap"
+          className="pointer-events-none absolute m-0 select-none whitespace-nowrap text-[clamp(1.75rem,10vw,3rem)] max-md:left-1/2 max-md:right-auto max-md:bottom-3 max-md:-translate-x-1/2 max-md:px-4 max-md:text-center md:bottom-[-18%] md:right-[-2%] md:left-auto md:translate-x-0 md:px-0 md:text-left md:text-[clamp(4.25rem,18vw,11.5rem)]"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
             fontWeight: 800,
-            fontSize: "clamp(4.25rem, 18vw, 11.5rem)",
             lineHeight: 0.85,
             letterSpacing: "-0.02em",
             /* #1B1B1B via alpha — separate opacity made it read gray */
@@ -151,16 +150,28 @@ export default function ContactSection() {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: reduceMotion ? 0 : 0.7, ease }}
           >
-            <div className="ml-auto mr-12 flex w-max max-w-full flex-row flex-wrap items-baseline gap-x-3 gap-y-2 sm:mr-14 sm:gap-x-4 md:mr-18 md:gap-x-5">
+            <div className="flex w-full min-w-0 max-w-full flex-col items-stretch gap-3 md:ml-auto md:mr-12 md:w-max md:flex-row md:flex-wrap md:items-baseline md:gap-x-4 lg:mr-18 lg:gap-x-5">
               <h2 className="m-0 shrink-0" style={SO_LETS_TALK_FONT}>
                 So let&apos;s talk
               </h2>
               <a
                 href={MAILTO}
                 style={SO_LETS_TALK_FONT}
-                className={`group inline-flex shrink-0 items-baseline ${emailColorStates} focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark`}
+                className={`group inline-flex min-w-0 max-w-full items-baseline md:max-w-none md:shrink-0 ${emailColorStates} focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark`}
               >
-                <SyneSlidingDuplicate text={EMAIL} />
+                {/* Mobile: wrap / break so long address stays in viewport */}
+                <span
+                  className="w-full min-w-0 break-all underline decoration-black/35 underline-offset-[6px] transition-[text-decoration-color] duration-200 group-hover:decoration-[rgba(23,23,23,0.35)] md:hidden"
+                  style={{
+                    ...SO_LETS_TALK_FONT,
+                    fontSize: "clamp(1.125rem, 4.25vw, 1.65rem)",
+                  }}
+                >
+                  {EMAIL}
+                </span>
+                <span className="hidden md:contents">
+                  <SyneSlidingDuplicate text={EMAIL} />
+                </span>
               </a>
             </div>
 
