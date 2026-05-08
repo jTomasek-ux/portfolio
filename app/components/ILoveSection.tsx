@@ -1,13 +1,19 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
+
+const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
 export default function ILoveSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       id="love"
-      className="bg-[#171717] px-8 py-20 text-[#ebd8c9] md:px-12 md:py-28"
+      className="bg-bg-dark px-8 py-20 text-cream md:px-12 md:py-28"
     >
       <div className="mx-auto max-w-[1400px]">
-        <p
+        <motion.p
           className="text-center"
           style={{
             fontFamily: "var(--font-syne), sans-serif",
@@ -16,9 +22,16 @@ export default function ILoveSection() {
             lineHeight: 1,
             letterSpacing: "-0.02em",
           }}
+          initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.8,
+            ease,
+          }}
         >
           &quot;I LOVE CREATING COOL SH*T&quot;
-        </p>
+        </motion.p>
       </div>
     </section>
   );
