@@ -76,7 +76,7 @@ export default function ScrollRevealText({
   });
 
   return (
-    <div ref={containerRef} className={`h-[200vh] ${className ?? ""}`}>
+    <div ref={containerRef} className={`h-[80vh] ${className ?? ""}`}>
       <div
         className="sticky top-0 flex h-screen flex-col justify-center gap-10"
         style={{ background: bgColor }}

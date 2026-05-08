@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
+import ILoveSection from "./ILoveSection";
 
 export default function HeroPage() {
   const [isDark] = useState(true);
@@ -35,6 +36,7 @@ export default function HeroPage() {
           onF1LeadCarExited={handleF1LeadCarExited}
         />
         <AboutSection />
+        <ILoveSection />
       </main>
     </>
   );
