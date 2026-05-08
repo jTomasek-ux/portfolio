@@ -12,9 +12,9 @@ const BG = "#F1E4DA";
 const TEXT = "#171717";
 const MUTED = "rgba(23, 23, 23, 0.55)";
 
-/** Email: default black; hover previous muted gray */
+/** Email: default black; hover muted — underline lives on `.slide-line` so it scrolls with SyneSlidingDuplicate */
 const emailColorStates =
-  "text-[#171717] decoration-black/35 transition-[color,text-decoration-color] duration-200 hover:text-[rgba(23,23,23,0.55)] hover:decoration-[rgba(23,23,23,0.35)]";
+  "text-[#171717] no-underline transition-[color] duration-200 hover:text-[rgba(23,23,23,0.55)] hover:[&_.slide-line]:decoration-[rgba(23,23,23,0.35)]";
 
 const EMAIL = "tomasekjan08@email.cz";
 const MAILTO = `mailto:${EMAIL}`;
@@ -64,18 +64,16 @@ function FooterSlidingLines({ label }: { label: string }) {
   );
 }
 
-/** Same slide pattern for Syne / SO_LETS_TALK_FONT (line-height 1.15, em-relative clip) */
+/** Same slide pattern for Syne / SO_LETS_TALK_FONT — underline on each line so it moves with text */
 function SyneSlidingDuplicate({ text }: { text: string }) {
+  const slot = "h-[calc(1.15em+4px)]";
+  const lineClass = `slide-line flex ${slot} shrink-0 items-center whitespace-nowrap underline decoration-black/35 underline-offset-[6px] transition-[text-decoration-color] duration-200`;
+
   return (
-    <span className="block h-[1.15em] overflow-hidden">
-      <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:translate-y-[-1.15em] motion-reduce:group-hover:translate-y-0">
-        <span className="block h-[1.15em] shrink-0 leading-[1.15] whitespace-nowrap">
-          {text}
-        </span>
-        <span
-          className="block h-[1.15em] shrink-0 leading-[1.15] whitespace-nowrap"
-          aria-hidden
-        >
+    <span className={`block ${slot} overflow-hidden`}>
+      <span className="flex flex-col transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:translate-y-[calc(-1.15em-4px)] motion-reduce:group-hover:translate-y-0">
+        <span className={lineClass}>{text}</span>
+        <span className={lineClass} aria-hidden>
           {text}
         </span>
       </span>
@@ -160,7 +158,7 @@ export default function ContactSection() {
               <a
                 href={MAILTO}
                 style={SO_LETS_TALK_FONT}
-                className={`group inline-flex shrink-0 items-baseline underline underline-offset-[6px] ${emailColorStates} focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark`}
+                className={`group inline-flex shrink-0 items-baseline ${emailColorStates} focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg-dark`}
               >
                 <SyneSlidingDuplicate text={EMAIL} />
               </a>

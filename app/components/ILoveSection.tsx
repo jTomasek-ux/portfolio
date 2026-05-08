@@ -10,7 +10,7 @@ export default function ILoveSection() {
   return (
     <section
       id="love"
-      className="bg-bg-dark px-8 py-20 text-cream md:px-12 md:py-28"
+      className="bg-bg-dark px-8 pt-20 pb-10 text-cream md:px-12 md:pt-28 md:pb-12"
     >
       <div className="mx-auto max-w-[1400px]">
         <motion.p
