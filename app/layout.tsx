@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Unbounded, Syne } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import SmoothScroll from "./components/SmoothScroll";
 import "./globals.css";
 
@@ -70,6 +71,7 @@ export default function RootLayout({
           </svg>
         </div>
         <SmoothScroll>{children}</SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
